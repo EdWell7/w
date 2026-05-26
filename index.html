@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EdWell - Premium Cozy Hub</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="dark-theme">
+
+    <div class="glow-bg-1"></div>
+    <div class="glow-bg-2"></div>
+
+    <section id="auth-screen" class="screen active">
+        <div class="auth-card">
+            <div class="brand">
+                <i class="fa-solid fa-cube logo-icon"></i>
+                <h1>Ed<span>Well</span></h1>
+            </div>
+            <p class="subtitle">Your Aesthetic Cybernetic Haven</p>
+            <form id="auth-form">
+                <div class="input-group">
+                    <i class="fa-solid fa-user"></i>
+                    <input type="text" id="username" placeholder="Username" required autocomplete="off">
+                </div>
+                <div class="input-group">
+                    <i class="fa-solid fa-lock"></i>
+                    <input type="password" id="password" placeholder="Password" required>
+                </div>
+                <button type="submit" class="btn-primary">Enter Dimension <i class="fa-solid fa-arrow-right"></i></button>
+            </form>
+        </div>
+    </section>
+
+    <section id="dashboard-screen" class="screen">
+        <header class="main-header">
+            <div class="user-profile">
+                <i class="fa-solid fa-circle-user avatar-icon"></i>
+                <div>
+                    <h3 id="display-username">Pilot</h3>
+                    <span class="status-tag"><i class="fa-solid fa-bolt"></i> Synced</span>
+                </div>
+            </div>
+            <div class="brand-mini">Ed<span>Well</span></div>
+            <button id="logout-btn" class="btn-icon-text"><i class="fa-solid fa-power-off"></i> Logout</button>
+        </header>
+
+        <main class="grid-container">
+            <div class="hub-card" onclick="switchScreen('ai-core-screen')">
+                <div class="card-icon cyan-glow"><i class="fa-solid fa-brain"></i></div>
+                <h2>AI Core</h2>
+                <p>Calorie diagnostics, biometric height scanning & tailored cyber-fashion predictive engines.</p>
+                <div class="card-footer">Launch Module <i class="fa-solid fa-chevron-right"></i></div>
+            </div>
+
+            <div class="hub-card" onclick="openLanguageModule()">
+                <div class="card-icon purple-glow"><i class="fa-solid fa-language"></i></div>
+                <h2>Micro-Lingual Room</h2>
+                <p>Master English in 60 seconds daily. Build your immersive, responsive gaming sanctuary via streaks.</p>
+                <div class="card-footer">Enter Room <i class="fa-solid fa-chevron-right"></i></div>
+            </div>
+
+            <div class="hub-card" onclick="switchScreen('study-play-screen')">
+                <div class="card-icon pink-glow"><i class="fa-solid fa-gamepad"></i></div>
+                <h2>Study & Play</h2>
+                <p>Pomodoro protocols, algorithmic sliding puzzles, infinite math loops & ambient mixers.</p>
+                <div class="card-footer">Open Deck <i class="fa-solid fa-chevron-right"></i></div>
+            </div>
+
+            <div class="hub-card" onclick="switchScreen('neuro-forge-screen')">
+                <div class="card-icon emerald-glow"><i class="fa-solid fa-microchip"></i></div>
+                <h2>Neuro-Forge</h2>
+                <p>Cognitive reflex matrix, sensory response tracking, and neuro-plasticity analytical reports.</p>
+                <div class="card-footer">Initiate Scan <i class="fa-solid fa-chevron-right"></i></div>
+            </div>
+        </main>
+    </section>
+
+    <section id="ai-core-screen" class="screen sub-screen">
+        <div class="sub-header">
+            <button class="btn-back" onclick="switchScreen('dashboard-screen')"><i class="fa-solid fa-arrow-left"></i> Dashboard</button>
+            <h2><i class="fa-solid fa-brain text-cyan"></i> AI Core Intelligence</h2>
+        </div>
+
+        <div class="sub-tabs">
+            <button class="tab-link active" onclick="openSubTab('ai-calories')"><i class="fa-solid fa-utensils"></i> Calorie Scan</button>
+            <button class="tab-link" onclick="openSubTab('ai-height')"><i class="fa-solid fa-ruler-vertical"></i> Biometric Height</button>
+            <button class="tab-link" onclick="openSubTab('ai-fashion')"><i class="fa-solid fa-shirt"></i> Thermal Fashion</button>
+        </div>
+
+        <div id="ai-calories" class="tab-content active">
+            <div class="ai-container">
+                <div class="upload-zone" id="calorie-upload-zone">
+                    <i class="fa-solid fa-cloud-arrow-up upload-icon"></i>
+                    <p>Drop meal image here or click to upload</p>
+                    <input type="file" id="calorie-file" accept="image/*" class="hidden-input">
+                    <div id="calorie-preview" class="img-preview"></div>
+                </div>
+                <button class="btn-primary-cyan" onclick="processCalorieAI()"><i class="fa-solid fa-wand-magic-sparkles"></i> Run AI Vision Analysis</button>
+                <div id="calorie-result" class="ai-result-box"></div>
+            </div>
+        </div>
+
+        <div id="ai-height" class="tab-content">
+            <div class="ai-container">
+                <div class="upload-zone" id="height-upload-zone">
+                    <i class="fa-solid fa-user-scan upload-icon"></i>
+                    <p>Upload a full body standing photo for biometric profiling</p>
+                    <input type="file" id="height-file" accept="image/*" class="hidden-input">
+                    <div id="height-preview" class="img-preview"></div>
+                </div>
+                <button class="btn-primary-cyan" onclick="processHeightAI()"><i class="fa-solid fa-expand"></i> Estimate Scale Matrix</button>
+                <div id="height-result" class="ai-result-box"></div>
+            </div>
+        </div>
+
+        <div id="ai-fashion" class="tab-content">
+            <div class="ai-container">
+                <div class="input-card">
+                    <label><i class="fa-solid fa-temperature-half"></i> Enter Current Ambient Temperature (°C)</label>
+                    <input type="number" id="fashion-temp" placeholder="e.g. 18" class="styled-input">
+                </div>
+                <button class="btn-primary-cyan" onclick="processFashionAI()"><i class="fa-solid fa-palette"></i> Generate Predictive Palette</button>
+                <div id="fashion-result" class="ai-result-box"></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="language-screen" class="screen sub-screen">
+        <div class="sub-header">
+            <button class="btn-back" onclick="switchScreen('dashboard-screen')"><i class="fa-solid fa-arrow-left"></i> Dashboard</button>
+            <div class="streak-badge"><i class="fa-solid fa-fire"></i> Streak: <span id="streak-count">0</span> Days</div>
+        </div>
+
+        <div id="lang-setup-view" class="lang-view view-hidden">
+            <div class="centered-card">
+                <h2>Choose your native language</h2>
+                <p class="card-desc">The UI stays in English. Translations & guides match your choice.</p>
+                <div class="lang-grid">
+                    <button class="btn-lang" onclick="setNativeLang('Arabic')">العربية (Arabic)</button>
+                    <button class="btn-lang" onclick="setNativeLang('French')">Français (French)</button>
+                    <button class="btn-lang" onclick="setNativeLang('Spanish')">Español (Spanish)</button>
+                    <button class="btn-lang" onclick="setNativeLang('Turkish')">Türkçe (Turkish)</button>
+                    <button class="btn-lang" onclick="setNativeLang('Japanese')">日本語 (Japanese)</button>
+                    <button class="btn-lang" onclick="setNativeLang('Korean')">한국어 (Korean)</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="lang-main-view" class="lang-view view-hidden">
+            <div class="room-layout">
+                <div class="room-panel">
+                    <div class="room-window-container">
+                        <div id="virtual-room" class="cozy-room-viewport">
+                            <div class="weather-overlay" id="room-weather"></div>
+                            <div class="base-floor"></div>
+                        </div>
+                    </div>
+                    <div class="room-meta">
+                        <h3>Your Virtual Sanctuary</h3>
+                        <p id="room-status-text">Empty and dark. Start learning to build it.</p>
+                    </div>
+                </div>
+
+                <div class="lesson-panel">
+                    <div id="lesson-gate-card" class="action-card">
+                        <i class="fa-solid fa-calendar-check giant-icon purple-text"></i>
+                        <h3>Daily Micro-Lesson</h3>
+                        <p>8 Essential curated words. Takes exactly 60 seconds.</p>
+                        <button class="btn-primary-purple" id="start-lesson-btn" onclick="startDailyLesson()">Begin Today's Protocol</button>
+                    </div>
+
+                    <div id="lesson-active-card" class="action-card hidden">
+                        <div class="lesson-progress-bar"><div id="lesson-progress" style="width: 12.5%;"></div></div>
+                        <div class="word-card-container">
+                            <h1 id="lesson-word">Word</h1>
+                            <h3 id="lesson-translation" class="purple-text">الترجمة</h3>
+                            <div class="pronounce-wrapper">
+                                <span id="lesson-pronounce">/text/</span>
+                                <button class="btn-audio-sim" onclick="simulateAudio()"><i class="fa-solid fa-volume-high"></i></button>
+                            </div>
+                            <blockquote id="lesson-example">"This is an example sentence."</blockquote>
+                        </div>
+                        <button class="btn-primary-purple" onclick="nextLessonWord()">Next Word (<span id="lesson-word-index">1</span>/8)</button>
+                    </div>
+
+                    <div id="quiz-card" class="action-card hidden">
+                        <div class="quiz-header">
+                            <h3><i class="fa-solid fa-bolt text-pink"></i> 20s Reflex Challenge</h3>
+                            <div id="quiz-timer" class="timer-circle">20</div>
+                        </div>
+                        <h2 id="quiz-question">Question?</h2>
+                        <div id="quiz-options" class="options-vertical">
+                            </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="study-play-screen" class="screen sub-screen">
+        <div class="sub-header">
+            <button class="btn-back" onclick="switchScreen('dashboard-screen')"><i class="fa-solid fa-arrow-left"></i> Dashboard</button>
+            <h2><i class="fa-solid fa-gamepad text-pink"></i> Study & Entertainment Deck</h2>
+        </div>
+
+        <div class="sub-tabs">
+            <button class="tab-link-play active" onclick="openPlayTab('play-pomodoro')"><i class="fa-solid fa-stopwatch"></i> Aesthetic Pomodoro</button>
+            <button class="tab-link-play" onclick="openPlayTab('play-puzzle')"><i class="fa-solid fa-puzzle-piece"></i> Sliding Puzzle</button>
+            <button class="tab-link-play" onclick="openPlayTab('play-math')"><i class="fa-solid fa-calculator"></i> Matrix Math (Infinite)</button>
+            <button class="tab-link-play" onclick="openPlayTab('play-ambient')"><i class="fa-solid fa-sliders"></i> Zen Soundscape</button>
+        </div>
+
+        <div id="play-pomodoro" class="tab-content-play active">
+            <div class="pomo-wrapper">
+                <div class="pomo-timer-display">
+                    <svg class="progress-ring" width="240" height="240">
+                        <circle class="progress-ring__circle-bg" stroke="rgba(255,255,255,0.05)" stroke-width="8" fill="transparent" r="110" cx="120" cy="120"/>
+                        <circle id="pomo-circle" class="progress-ring__circle" stroke="#ff79c6" stroke-width="8" fill="transparent" r="110" cx="120" cy="120"/>
+                    </svg>
+                    <div class="pomo-time" id="pomo-time-text">25:00</div>
+                    <div class="pomo-status" id="pomo-status-text">Study Mode</div>
+                </div>
+                <div class="pomo-controls">
+                    <button class="btn-play-ctrl" onclick="togglePomodoro()"><i id="pomo-start-icon" class="fa-solid fa-play"></i></button>
+                    <button class="btn-play-ctrl reset" onclick="resetPomodoro()"><i class="fa-solid fa-rotate-right"></i></button>
+                </div>
+            </div>
+        </div>
+
+        <div id="play-puzzle" class="tab-content-play">
+            <div class="puzzle-wrapper">
+                <div class="puzzle-header">
+                    <span>Level: <b id="puzzle-level">3x3 Grid</b></span>
+                    <button class="btn-action-sm" onclick="initPuzzle()"><i class="fa-solid fa-shuffle"></i> Reset</button>
+                    <button class="btn-action-sm skip" onclick="skipPuzzle()">Skip <i class="fa-solid fa-forward"></i></button>
+                </div>
+                <div id="puzzle-grid" class="puzzle-container"></div>
+            </div>
+        </div>
+
+        <div id="play-math" class="tab-content-play">
+            <div class="math-wrapper">
+                <div class="math-stats">
+                    <span>Matrix Quest: <b id="math-level-txt">1</b>/2500</span>
+                    <button class="btn-action-sm skip" onclick="skipMath()">Skip <i class="fa-solid fa-forward"></i></button>
+                </div>
+                <div class="math-card">
+                    <div id="math-question" class="math-expr">24 * 5 + 12</div>
+                    <div id="math-options" class="options-grid"></div>
+                </div>
+            </div>
+        </div>
+
+        <div id="play-ambient" class="tab-content-play">
+            <div class="ambient-wrapper">
+                <p class="section-desc">Forge your hyper-focus environmental soundscape. Click icons to toggle channels and move sliders to blend frequencies.</p>
+                <div class="ambient-grid">
+                    <div class="ambient-row" data-sound="rain">
+                        <button class="btn-ambient-toggle" onclick="toggleAmbientSound(this)"><i class="fa-solid fa-cloud-showers-heavy"></i> Cyber Rain</button>
+                        <input type="range" class="ambient-slider" min="0" max="100" value="70" oninput="adjustAmbientVolume(this)">
+                        <div class="audio-wave-anim"><span></span><span></span><span></span></div>
+                    </div>
+                    <div class="ambient-row" data-sound="cafe">
+                        <button class="btn-ambient-toggle" onclick="toggleAmbientSound(this)"><i class="fa-solid fa-mug-saucer"></i> Tokyo Cafe Ambient</button>
+                        <input type="range" class="ambient-slider" min="0" max="100" value="40" oninput="adjustAmbientVolume(this)">
+                        <div class="audio-wave-anim"><span></span><span></span><span></span></div>
+                    </div>
+                    <div class="ambient-row" data-sound="wind">
+                        <button class="btn-ambient-toggle" onclick="toggleAmbientSound(this)"><i class="fa-solid fa-wind"></i> Solar Winds</button>
+                        <input type="range" class="ambient-slider" min="0" max="100" value="30" oninput="adjustAmbientVolume(this)">
+                        <div class="audio-wave-anim"><span></span><span></span><span></span></div>
+                    </div>
+                    <div class="ambient-row" data-sound="fire">
+                        <button class="btn-ambient-toggle" onclick="toggleAmbientSound(this)"><i class="fa-solid fa-fire"></i> Cozy Fireplace</button>
+                        <input type="range" class="ambient-slider" min="0" max="100" value="50" oninput="adjustAmbientVolume(this)">
+                        <div class="audio-wave-anim"><span></span><span></span><span></span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="neuro-forge-screen" class="screen sub-screen">
+        <div class="sub-header">
+            <button class="btn-back" onclick="switchScreen('dashboard-screen')"><i class="fa-solid fa-arrow-left"></i> Dashboard</button>
+            <h2><i class="fa-solid fa-microchip text-emerald"></i> Neuro-Forge Reflex Core</h2>
+        </div>
+        <div class="neuro-grid">
+            <div class="neuro-card-test">
+                <h3>Synaptic Speed Test</h3>
+                <p>Click the launch button below. Wait for the terminal block to flash <b class="text-emerald">NEON GREEN</b>, then click it instantly to gauge neural transmission lag.</p>
+                <div id="reflex-box" class="reflex-trigger" onclick="triggerReflexClick()">
+                    <span>Click to Initialize</span>
+                </div>
+                <div id="reflex-score" class="reflex-result">Latency: -- ms</div>
+            </div>
+            <div class="neuro-card-stats">
+                <h3>Cognitive Analytics</h3>
+                <div class="stat-row">
+                    <span>Neural Plasticity Rating:</span>
+                    <span id="neuro-plasticity" class="text-emerald">Excellent (142 points)</span>
+                </div>
+                <div class="stat-row">
+                    <span>Reaction Threshold:</span>
+                    <span id="neuro-reaction">-- ms</span>
+                </div>
+                <div class="stat-row">
+                    <span>Completed Synapses:</span>
+                    <span id="neuro-sessions">0 Protocols</span>
+                </div>
+                <div class="brain-matrix-display">
+                    <div class="matrix-node row1"></div>
+                    <div class="matrix-node row2"></div>
+                    <div class="matrix-node row3"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div id="reward-modal" class="modal-overlay hidden">
+        <div class="reward-popup-card transform-scale-down">
+            <div class="crate-container" id="crate-box-element" onclick="triggerCrateOpening()">
+                <div class="crate-lid"></div>
+                <div class="crate-body"><i class="fa-solid fa-box-open"></i></div>
+            </div>
+            <h2 id="reward-title">You Discovered a Mystery Supply Drop!</h2>
+            <p id="reward-instruction">Click the crate terminal above to initiate decompression.</p>
+            
+            <div id="unboxed-item-display" class="unboxed-view hidden">
+                <div id="item-rarity-badge" class="rarity-badge common">COMMON</div>
+                <div id="item-icon-container" class="item-visual-frame"></div>
+                <h1 id="unboxed-item-name">Neon Sign</h1>
+                <p id="unboxed-item-desc">Added safely to your room blueprints grid.</p>
+                <button class="btn-primary" onclick="closeRewardModal()">Synchronize Sanctuary</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="audio-toast" class="toast">🔉 Synthesizing Phoenix Audio Output Engine...</div>
+
+    <script src="script.js"></script>
+</body>
+</html>
