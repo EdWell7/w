@@ -70,7 +70,7 @@ body {
 .text-emerald { color: var(--emerald-neon); }
 
 /* ==========================================================================
-   AUTHENTICATION SCREEN (GLASSMORPHISM)
+   AUTHENTICATION SCREEN (SIGN IN / SIGN UP SYSTEM)
    ========================================================================== */
 #auth-screen {
     display: none;
@@ -83,7 +83,7 @@ body {
     background: rgba(18, 18, 37, 0.6);
     backdrop-filter: blur(20px);
     border: 1px solid var(--border-color);
-    padding: 3rem;
+    padding: 2.5rem 3rem;
     border-radius: 24px;
     width: 100%;
     max-width: 440px;
@@ -96,12 +96,39 @@ body {
     align-items: center;
     justify-content: center;
     gap: 0.8rem;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.3rem;
 }
 .logo-icon { font-size: 2.5rem; color: var(--cyan-neon); filter: drop-shadow(0 0 8px var(--cyan-glow)); }
 .brand h1 { font-size: 2.5rem; font-weight: 800; letter-spacing: -1px; }
 .brand h1 span { color: var(--purple-neon); }
-.subtitle { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 2.5rem; }
+.subtitle { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 1.5rem; }
+
+/* AUTH DOUBLE TABS */
+.auth-tabs {
+    display: flex;
+    background: rgba(0,0,0,0.2);
+    padding: 4px;
+    border-radius: 12px;
+    margin-bottom: 2rem;
+    border: 1px solid var(--border-color);
+}
+.auth-tab-btn {
+    flex: 1;
+    background: transparent;
+    border: none;
+    padding: 0.7rem;
+    color: var(--text-muted);
+    font-weight: 600;
+    font-size: 0.95rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+.auth-tab-btn.active {
+    background: var(--bg-card);
+    color: var(--cyan-neon);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
 
 .input-group {
     position: relative;
@@ -312,7 +339,7 @@ body {
 .btn-option:hover { background: rgba(255,255,255,0.06); border-color: var(--pink-neon); }
 
 /* ==========================================================================
-   MODULE 3: STUDY & PLAY (POMODORO, PUZZLE, MATH, AMBIENT)
+   MODULE 3: STUDY & PLAY
    ========================================================================== */
 .pomo-wrapper { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 3rem 0; }
 .pomo-timer-display { position: relative; width: 240px; height: 240px; display: flex; flex-direction: column; align-items: center; justify-content: center; }
@@ -330,7 +357,7 @@ body {
 .puzzle-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; }
 .btn-action-sm { background: rgba(255,255,255,0.05); border: 1px solid var(--border-color); padding: 0.4rem 0.8rem; border-radius: 8px; color: white; cursor: pointer; font-size: 0.85rem; }
 .btn-action-sm.skip { background: rgba(255, 121, 198, 0.1); border-color: rgba(255, 121, 198, 0.2); color: var(--pink-neon); }
-.puzzle-container { display: grid; background: #0c0c1a; pading: 0.5rem; border-radius: 12px; gap: 6px; aspect-ratio: 1; }
+.puzzle-container { display: grid; background: #0c0c1a; padding: 0.5rem; border-radius: 12px; gap: 6px; aspect-ratio: 1; }
 .puzzle-piece { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 8px; color: white; font-size: 1.5rem; font-weight: 700; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.2s; }
 .puzzle-piece:hover { background: rgba(255, 121, 198, 0.15); border-color: var(--pink-neon); }
 .puzzle-piece.empty { background: transparent; border: none; cursor: default; }
@@ -353,7 +380,6 @@ body {
 .ambient-slider::-webkit-slider-thumb { -webkit-appearance: none; width: 16px; height: 16px; border-radius: 50%; background: var(--text-muted); cursor: pointer; transition: background 0.2s; }
 .ambient-row.active .ambient-slider::-webkit-slider-thumb { background: var(--pink-neon); box-shadow: 0 0 8px var(--pink-neon); }
 
-/* Audio Wave Visualizer Animation */
 .audio-wave-anim { display: flex; gap: 3px; width: 20px; height: 20px; align-items: flex-end; opacity: 0; }
 .ambient-row.active .audio-wave-anim { opacity: 1; }
 .audio-wave-anim span { display: block; width: 3px; height: 5px; background: var(--pink-neon); animation: bounceWave 0.8s ease-in-out infinite alternate; }
@@ -362,7 +388,7 @@ body {
 @keyframes bounceWave { from { height: 4px; } to { height: 18px; } }
 
 /* ==========================================================================
-   MODULE 4: NEURO-FORGE COGNITIVE TRACKER
+   MODULE 4: NEURO-FORGE
    ========================================================================== */
 .neuro-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 2rem; }
 @media(max-width:800px){ .neuro-grid { grid-template-columns: 1fr; } }
@@ -386,7 +412,7 @@ body {
 @keyframes scanMatrix { 0% { transform: translateX(-100px); } 100% { transform: translateX(500px); } }
 
 /* ==========================================================================
-   GLOBAL REWARD MYSTERY MODAL UI
+   GLOBAL REWARD MYSTERY MODAL
    ========================================================================== */
 .modal-overlay {
     position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(5,5,10,0.85); backdrop-filter: blur(12px); z-index: 1000; display: flex; align-items: center; justify-content: center; padding: 1.5rem;
@@ -397,13 +423,11 @@ body {
 .reward-popup-card.transform-scale-down { transform: scale(0.7); opacity: 0; }
 .reward-popup-card.transform-scale-up { transform: scale(1); opacity: 1; }
 
-/* CRATE OPENING SYSTEM ANIMATIONS */
 .crate-container { width: 120px; height: 120px; margin: 0 auto 2rem auto; position: relative; cursor: pointer; }
 .crate-lid { position: absolute; top: 0; left: 10px; width: 100%; height: 30px; background: #6c757d; border-radius: 6px 6px 0 0; border: 3px solid #495057; transition: transform 0.3s; transform-origin: top left; }
 .crate-body { position: absolute; bottom: 0; left: 10px; width: 100%; height: 85px; background: #495057; border: 3px solid #343a40; border-radius: 0 0 10px 10px; display: flex; align-items: center; justify-content: center; font-size: 2.5rem; color: #dee2e6; }
 .crate-container:hover .crate-body { color: var(--pink-neon); }
 
-/* Animation trigger on click */
 .crate-container.open .crate-lid { transform: rotate(-70deg); }
 .crate-container.open { animation: boxShake 0.5s ease-in-out; }
 @keyframes boxShake {
@@ -417,7 +441,7 @@ body {
 
 .unboxed-view { animation: fadeIn 0.5s ease forwards; margin-top: 1rem; }
 .rarity-badge {
-    display: inline-block; padding: 0.3rem 1rem; border-radius: 20px; font-size: 0.75rem; font-weight: 800; tracking-spacing: 1px; margin-bottom: 1.5rem;
+    display: inline-block; padding: 0.3rem 1rem; border-radius: 20px; font-size: 0.75rem; font-weight: 800; margin-bottom: 1.5rem;
 }
 .rarity-badge.common { background: rgba(255,255,255,0.1); color: #fff; }
 .rarity-badge.rare { background: rgba(0,242,254,0.15); color: var(--cyan-neon); border: 1px solid rgba(0,242,254,0.3); }
@@ -433,7 +457,6 @@ body {
 #unboxed-item-name { font-size: 2rem; font-weight: 800; margin-bottom: 0.4rem; }
 #unboxed-item-desc { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 2rem; }
 
-/* AUDIO SYSTEM INTEGRATION TOAST */
 .toast {
     position: fixed; bottom: 20px; right: 20px; background: var(--bg-surface); border: 1px solid var(--border-color); padding: 1rem 1.5rem; border-radius: 12px; z-index: 5000; font-weight: 600; font-size: 0.9rem; box-shadow: 0 10px 30px rgba(0,0,0,0.5); transform: translateY(100px); opacity: 0; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
