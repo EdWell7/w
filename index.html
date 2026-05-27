@@ -5,20 +5,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EdWell - Premium Cozy Hub</title>
     <link rel="stylesheet" href="style.css">
+    <!-- FontAwesome for Premium Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body class="dark-theme">
 
+    <!-- BACKGROUND ANIMATED GLOWS -->
     <div class="glow-bg-1"></div>
     <div class="glow-bg-2"></div>
 
+    <!-- AUTHENTICATION SCREEN (SIGN IN / SIGN UP) -->
     <section id="auth-screen" class="screen active">
         <div class="auth-card">
             <div class="brand">
                 <i class="fa-solid fa-cube logo-icon"></i>
                 <h1>Ed<span>Well</span></h1>
             </div>
-            <p class="subtitle">Your Aesthetic Cybernetic Haven</p>
+            <p class="subtitle" id="auth-subtitle">Your Aesthetic Cybernetic Haven</p>
+            
+            <!-- Auth Tabs Switcher -->
+            <div class="auth-tabs">
+                <button id="tab-login" class="auth-tab-btn active" onclick="switchAuthMode('login')">Sign In</button>
+                <button id="tab-register" class="auth-tab-btn" onclick="switchAuthMode('register')">Sign Up</button>
+            </div>
+
             <form id="auth-form">
                 <div class="input-group">
                     <i class="fa-solid fa-user"></i>
@@ -28,11 +38,12 @@
                     <i class="fa-solid fa-lock"></i>
                     <input type="password" id="password" placeholder="Password" required>
                 </div>
-                <button type="submit" class="btn-primary">Enter Dimension <i class="fa-solid fa-arrow-right"></i></button>
+                <button type="submit" id="auth-submit-btn" class="btn-primary">Enter Dimension <i class="fa-solid fa-arrow-right"></i></button>
             </form>
         </div>
     </section>
 
+    <!-- MAIN DASHBOARD SCREEN -->
     <section id="dashboard-screen" class="screen">
         <header class="main-header">
             <div class="user-profile">
@@ -47,6 +58,7 @@
         </header>
 
         <main class="grid-container">
+            <!-- Hub Card 1: AI Core -->
             <div class="hub-card" onclick="switchScreen('ai-core-screen')">
                 <div class="card-icon cyan-glow"><i class="fa-solid fa-brain"></i></div>
                 <h2>AI Core</h2>
@@ -54,6 +66,7 @@
                 <div class="card-footer">Launch Module <i class="fa-solid fa-chevron-right"></i></div>
             </div>
 
+            <!-- Hub Card 2: 1-Min Language Room -->
             <div class="hub-card" onclick="openLanguageModule()">
                 <div class="card-icon purple-glow"><i class="fa-solid fa-language"></i></div>
                 <h2>Micro-Lingual Room</h2>
@@ -61,6 +74,7 @@
                 <div class="card-footer">Enter Room <i class="fa-solid fa-chevron-right"></i></div>
             </div>
 
+            <!-- Hub Card 3: Study & Entertainment -->
             <div class="hub-card" onclick="switchScreen('study-play-screen')">
                 <div class="card-icon pink-glow"><i class="fa-solid fa-gamepad"></i></div>
                 <h2>Study & Play</h2>
@@ -68,6 +82,7 @@
                 <div class="card-footer">Open Deck <i class="fa-solid fa-chevron-right"></i></div>
             </div>
 
+            <!-- Hub Card 4: Neuro-Forge -->
             <div class="hub-card" onclick="switchScreen('neuro-forge-screen')">
                 <div class="card-icon emerald-glow"><i class="fa-solid fa-microchip"></i></div>
                 <h2>Neuro-Forge</h2>
@@ -77,6 +92,7 @@
         </main>
     </section>
 
+    <!-- MODULE 1: AI CORE -->
     <section id="ai-core-screen" class="screen sub-screen">
         <div class="sub-header">
             <button class="btn-back" onclick="switchScreen('dashboard-screen')"><i class="fa-solid fa-arrow-left"></i> Dashboard</button>
@@ -89,6 +105,7 @@
             <button class="tab-link" onclick="openSubTab('ai-fashion')"><i class="fa-solid fa-shirt"></i> Thermal Fashion</button>
         </div>
 
+        <!-- Tab 1: Calories -->
         <div id="ai-calories" class="tab-content active">
             <div class="ai-container">
                 <div class="upload-zone" id="calorie-upload-zone">
@@ -102,6 +119,7 @@
             </div>
         </div>
 
+        <!-- Tab 2: Height -->
         <div id="ai-height" class="tab-content">
             <div class="ai-container">
                 <div class="upload-zone" id="height-upload-zone">
@@ -115,6 +133,7 @@
             </div>
         </div>
 
+        <!-- Tab 3: Fashion -->
         <div id="ai-fashion" class="tab-content">
             <div class="ai-container">
                 <div class="input-card">
@@ -127,12 +146,14 @@
         </div>
     </section>
 
+    <!-- MODULE 2: MICRO-LINGUAL ROOM -->
     <section id="language-screen" class="screen sub-screen">
         <div class="sub-header">
             <button class="btn-back" onclick="switchScreen('dashboard-screen')"><i class="fa-solid fa-arrow-left"></i> Dashboard</button>
             <div class="streak-badge"><i class="fa-solid fa-fire"></i> Streak: <span id="streak-count">0</span> Days</div>
         </div>
 
+        <!-- LANG SCREEN 1: NATIVE SELECTION -->
         <div id="lang-setup-view" class="lang-view view-hidden">
             <div class="centered-card">
                 <h2>Choose your native language</h2>
@@ -148,8 +169,10 @@
             </div>
         </div>
 
+        <!-- LANG SCREEN 2: MAIN HUB & ROOM VISUALIZER -->
         <div id="lang-main-view" class="lang-view view-hidden">
             <div class="room-layout">
+                <!-- Left: Virtual Room Simulator -->
                 <div class="room-panel">
                     <div class="room-window-container">
                         <div id="virtual-room" class="cozy-room-viewport">
@@ -163,14 +186,16 @@
                     </div>
                 </div>
 
+                <!-- Right: Daily Lesson Action Panel -->
                 <div class="lesson-panel">
                     <div id="lesson-gate-card" class="action-card">
                         <i class="fa-solid fa-calendar-check giant-icon purple-text"></i>
                         <h3>Daily Micro-Lesson</h3>
-                        <p>8 Essential curated words. Takes exactly 60 seconds.</p>
+                        <p id="ai-lesson-status-desc">Generating 8 custom words using generative AI structures.</p>
                         <button class="btn-primary-purple" id="start-lesson-btn" onclick="startDailyLesson()">Begin Today's Protocol</button>
                     </div>
 
+                    <!-- ACTIVE LESSON INTERFACE -->
                     <div id="lesson-active-card" class="action-card hidden">
                         <div class="lesson-progress-bar"><div id="lesson-progress" style="width: 12.5%;"></div></div>
                         <div class="word-card-container">
@@ -185,6 +210,7 @@
                         <button class="btn-primary-purple" onclick="nextLessonWord()">Next Word (<span id="lesson-word-index">1</span>/8)</button>
                     </div>
 
+                    <!-- QUIZ CHALLENGE INTERFACE -->
                     <div id="quiz-card" class="action-card hidden">
                         <div class="quiz-header">
                             <h3><i class="fa-solid fa-bolt text-pink"></i> 20s Reflex Challenge</h3>
@@ -192,13 +218,15 @@
                         </div>
                         <h2 id="quiz-question">Question?</h2>
                         <div id="quiz-options" class="options-vertical">
-                            </div>
+                            <!-- Options injected dynamically -->
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
+    <!-- MODULE 3: STUDY & PLAY -->
     <section id="study-play-screen" class="screen sub-screen">
         <div class="sub-header">
             <button class="btn-back" onclick="switchScreen('dashboard-screen')"><i class="fa-solid fa-arrow-left"></i> Dashboard</button>
@@ -212,6 +240,7 @@
             <button class="tab-link-play" onclick="openPlayTab('play-ambient')"><i class="fa-solid fa-sliders"></i> Zen Soundscape</button>
         </div>
 
+        <!-- Sub Module 1: Pomodoro -->
         <div id="play-pomodoro" class="tab-content-play active">
             <div class="pomo-wrapper">
                 <div class="pomo-timer-display">
@@ -229,6 +258,7 @@
             </div>
         </div>
 
+        <!-- Sub Module 2: Sliding Puzzle -->
         <div id="play-puzzle" class="tab-content-play">
             <div class="puzzle-wrapper">
                 <div class="puzzle-header">
@@ -240,6 +270,7 @@
             </div>
         </div>
 
+        <!-- Sub Module 3: Math Engine -->
         <div id="play-math" class="tab-content-play">
             <div class="math-wrapper">
                 <div class="math-stats">
@@ -253,6 +284,7 @@
             </div>
         </div>
 
+        <!-- Sub Module 4: Zen Soundscape -->
         <div id="play-ambient" class="tab-content-play">
             <div class="ambient-wrapper">
                 <p class="section-desc">Forge your hyper-focus environmental soundscape. Click icons to toggle channels and move sliders to blend frequencies.</p>
@@ -282,6 +314,7 @@
         </div>
     </section>
 
+    <!-- MODULE 4: NEURO-FORGE -->
     <section id="neuro-forge-screen" class="screen sub-screen">
         <div class="sub-header">
             <button class="btn-back" onclick="switchScreen('dashboard-screen')"><i class="fa-solid fa-arrow-left"></i> Dashboard</button>
@@ -319,6 +352,7 @@
         </div>
     </section>
 
+    <!-- GLOBAL DYNAMIC MODAL: REWARD MYSTERY CRATE BOX -->
     <div id="reward-modal" class="modal-overlay hidden">
         <div class="reward-popup-card transform-scale-down">
             <div class="crate-container" id="crate-box-element" onclick="triggerCrateOpening()">
@@ -338,7 +372,8 @@
         </div>
     </div>
 
-    <div id="audio-toast" class="toast">🔉 Synthesizing Phoenix Audio Output Engine...</div>
+    <!-- AUDIO SIMULATION NOTIFICATION ENGINE -->
+    <div id="audio-toast" class="toast"></div>
 
     <script src="script.js"></script>
 </body>
